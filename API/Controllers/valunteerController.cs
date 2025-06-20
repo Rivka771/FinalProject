@@ -38,10 +38,10 @@ namespace API.Controllers
         }
         ValunteerBLL ValunteerBLL=new ValunteerBLL();
         //ex1
-        [Route("api/ValunteerBLL/GetAssignedRequestsByIdVullenter /{id}"), HttpGet]
-        public IHttpActionResult GetAssignedRequestsByIdVullenter(int id)
+        [Route("api/ValunteerBLL/GetAssignedRequestsByIdVullenter/{id}"), HttpGet]
+        public IHttpActionResult GetAssignedRequestsByIdVullenter(string id)
         {
-            if (!int.TryParse(id, out int volunteerId))
+            if (int.Parse(id)<48 && int.Parse(id)>57)
             {
                 return BadRequest("הקלט חייב להיות מספר שלם תקין.");
             }
@@ -54,7 +54,7 @@ namespace API.Controllers
             {
                 return BadRequest("משתמש זה אינו קיים במאגר");
             }
-            return Ok(ValunteerBLL.GetAssignedRequestsByIdVullenter(id));
+            return Ok(ValunteerBLL.GetAssignedRequestsByIdVullenter(id1));
         }
          
         

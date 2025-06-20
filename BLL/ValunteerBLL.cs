@@ -18,7 +18,7 @@ namespace BLL
             var allVolunteers = valunteerDAL.GetVolunteers();
             return allVolunteers.Any(v => v.VolunteerID == id);
         }
-
+        //ex1
         public List<AssignedRequestsDTO> GetAssignedRequestsByIdVullenter(int Id)
         {
             return Converters.AssignedRequestsConverter.ToAssignedRequestsDTO(valunteerDAL.GetAssignedRequestsByIdVullenter(Id));

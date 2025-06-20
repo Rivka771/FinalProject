@@ -1,16 +1,15 @@
 ﻿
-using BLL;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using System.Web.UI.WebControls;
+using BLL;
 
 namespace API.Controllers
 {
     public class RequestController : ApiController
     {
         RequestBLL requestBLL = new RequestBLL();
-        ValunteerBLL ValunteerBLL=new ValunteerBLL();
+        ValunteerBLL ValunteerBLL = new ValunteerBLL();
         ApprovedRequestBLL approvedRequestBLL = new ApprovedRequestBLL();
         // GET: api/Request
         public IEnumerable<string> Get()
@@ -42,39 +41,40 @@ namespace API.Controllers
         [Route("api /requestBLL/GetUnAssigned"), HttpGet]
         public IHttpActionResult GetUnAssigned()
         {
-          
-                return Ok(requestBLL.GetUnAssigned());
-    
-         
+
+            return Ok(requestBLL.GetUnAssigned());
+
+
         }
 
         //ex3
         [Route("api/requestBLL/GetHelpSeekerWithMaxRequests"), HttpGet]
         public IHttpActionResult GetHelpSeekerWithMaxRequests()
         {
-           
-                return Ok(requestBLL.GetHelpSeekerWithMaxRequests());
-           
+
+            return Ok(requestBLL.GetHelpSeekerWithMaxRequests());
+
 
         }
 
         //ex4
         [Route("api/ApprovedRequestBLL/ApprovedRequestInfos"), HttpGet]
         public IHttpActionResult ApprovedRequestInfos()
-        {          
-            return Ok(approvedRequestBLL.ApprovedRequestInfos());      
+        {
+            return Ok(approvedRequestBLL.ApprovedRequestInfos());
         }
 
         //ex5
         [Route("api/requestBLL/RequestsMadeToTheApplicantMostOften/{id}"), HttpGet]
         public IHttpActionResult RequestsMadeToTheApplicantMostOften(string id)
         {
-           
-            if (!int.TryParse(id, out int volunteerId))
+
+            if (int.Parse(id) < 48 && int.Parse(id) > 57)
             {
                 return BadRequest("הקלט חייב להיות מספר שלם תקין.");
             }
-            if (id == null){
+            if (id == null)
+            {
                 return BadRequest("יש להזין קלט");
             }
             int id1 = Convert.ToInt32(id);
@@ -82,9 +82,9 @@ namespace API.Controllers
             {
                 return BadRequest("משתמש זה אינו קיים במאגר");
             }
-            return Ok(requestBLL.RequestsMadeToTheApplicantMostOften(volunteerId));
+            return Ok(requestBLL.RequestsMadeToTheApplicantMostOften(id1));
         }
     }
 
-    }
+}
 
